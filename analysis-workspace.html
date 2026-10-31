@@ -162,6 +162,94 @@
   .skip{position:absolute;left:-999px;top:.5rem;z-index:100;background:var(--card-solid);color:var(--tx);padding:.5rem .9rem;border-radius:10px;border:1px solid var(--line2)}.skip:focus{left:.8rem}
   .btn[disabled]{opacity:.45;cursor:not-allowed}.seg2{display:inline-flex;gap:.3rem;flex-wrap:wrap}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /*background*/
+  /* ===== CONTROL ROOM INTERACTIVE BACKGROUND ===== */
+
+body {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3, 12, 14, 0.28),
+            rgba(3, 10, 12, 0.72)
+        ),
+        url("https://raw.githubusercontent.com/ansh4013/dashboard/main/file_0000000048b882119dbf6826027289a0.png")
+        center center / cover no-repeat fixed !important;
+
+    background-attachment: fixed !important;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Animated atmospheric glow */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at var(--mouse-x, 50%) var(--mouse-y, 45%),
+            rgba(190, 255, 120, 0.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(0, 255, 190, 0.10),
+            transparent 35%
+        );
+
+    animation: atmosphere 9s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphere {
+    from {
+        opacity: 0.45;
+        transform: scale(1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+/* Subtle cinematic foreground */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background: linear-gradient(
+        115deg,
+        transparent 30%,
+        rgba(210, 255, 150, 0.035) 50%,
+        transparent 70%
+    );
+
+    background-size: 200% 100%;
+    animation: lightSweep 12s linear infinite;
+}
+
+@keyframes lightSweep {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+/* Glass-style website sections */
+.card, .panel, .live, .hero {
+    backdrop-filter: blur(5px);
+}
+
+/* Mobile optimization */
+@media(max-width: 768px) {
+    body {
+        background-position: center center;
+        background-attachment: scroll !important;
+    }
+}
 </style>
 </head>
 <body>
@@ -191,7 +279,20 @@
 <dialog id="pal" class="pal"><input id="palIn" placeholder="Jump to a section or run an action…" autocomplete="off"><ul id="palList"></ul></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 <input type="file" id="importFile" accept="application/json" hidden>
+<script>
+/* CONTROL ROOM INTERACTIVE LIGHT */
+document.addEventListener("pointermove", function(e) {
+    document.body.style.setProperty(
+        "--mouse-x",
+        (e.clientX / window.innerWidth * 100) + "%"
+    );
 
+    document.body.style.setProperty(
+        "--mouse-y",
+        (e.clientY / window.innerHeight * 100) + "%"
+    );
+});
+</script>
 <script>
 window.addEventListener('error',function(e){var v=document.getElementById('view')||document.body;
   if(v&&!v.children.length){v.innerHTML='<div style="padding:2rem;font:14px system-ui;color:#fb7185">Something went wrong loading this page: '+String(e.message).replace(/</g,'&lt;')+'</div>';}});
