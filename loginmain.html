@@ -177,14 +177,14 @@
       <label for="message">Message (optional)</label>
       <input type="text" id="message" name="message" placeholder="Anything you'd like to say…" maxlength="200" />
 
-      <button type="submit" id="submitBtn">Enter Nexora →</button>
+      <button type="submit" id="submitBtn">Enter DASHBOARD→</button>
     </form>
 
     <p class="privacy">
       By continuing you agree that your details may be stored to improve the product.
       We do not sell your data. <a href="#" id="privacyLink">Privacy note</a>
     </p>
-    <a class="skip" href="https://ansh4013.github.io/aichatbot-/" id="skipLink">Skip for now</a>
+    <a class="skip" href="https://ansh4013.github.io/dashboard/dashboard.html" id="skipLink">Skip for now</a>
   </div>
 
   <script>
@@ -199,7 +199,7 @@
     const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
 
     // Where to send the user after successful login
-    const DEFAULT_REDIRECT = 'https://ansh4013.github.io/aichatbot-/';
+    const DEFAULT_REDIRECT = 'https://ansh4013.github.io/dashboard/dashboard.html';
 
     // ----------------------------------------------------------
     const params = new URLSearchParams(location.search);
@@ -254,8 +254,6 @@
           .from('nexora_logins')
           .insert([payload])
           .select('id')
-          .single();
-
         if (error) throw error;
 
         // Mark session so gate doesn't ask again
