@@ -253,7 +253,6 @@
         const { data, error } = await sb
           .from('nexora_logins')
           .insert([payload])
-          .select('id')
         if (error) throw error;
 
         // Mark session so gate doesn't ask again
