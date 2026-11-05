@@ -262,7 +262,6 @@
           localStorage.setItem('nexora_user', JSON.stringify({
             name: payload.name,
             email: payload.email,
-            id: data?.id,
             at: new Date().toISOString()
           }));
         } catch (_) {}
