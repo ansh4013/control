@@ -206,10 +206,10 @@
     const REDIRECT_URL = params.get('return') || DEFAULT_REDIRECT;
     const SESSION_KEY = 'nexora_logged_in';
 
-    // Already logged in this session → skip form
-    if (sessionStorage.getItem(SESSION_KEY)) {
-      window.location.replace(REDIRECT_URL);
-    }
+    // Already logged in → skip login page
+if (localStorage.getItem(SESSION_KEY) === '1') {
+  window.location.replace(REDIRECT_URL);
+}
 
     // Init Supabase client
     const { createClient } = supabase;
@@ -256,7 +256,7 @@
         if (error) throw error;
 
         // Mark session so gate doesn't ask again
-        sessionStorage.setItem(SESSION_KEY, '1');
+        localStorage.setItem(SESSION_KEY, '1');
         try {
           localStorage.setItem('nexora_user', JSON.stringify({
             name: payload.name,
