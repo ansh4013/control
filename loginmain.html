@@ -149,6 +149,17 @@
 
       <label for="email">Email *</label>
       <input type="email" id="email" name="email" required placeholder="you@example.com" maxlength="120" />
+<label for="phone">Contact Number *</label>
+<input
+  type="tel"
+  id="phone"
+  name="phone"
+  required
+  placeholder="Enter your contact number"
+  maxlength="15"
+  pattern="[0-9+() -]{7,15}"
+  title="Enter a valid contact number"
+/>
 
       <div class="row">
         <div>
@@ -229,6 +240,7 @@ if (localStorage.getItem(SESSION_KEY) === '1') {
       const payload = {
         name:       document.getElementById('name').value.trim(),
         email:      document.getElementById('email').value.trim().toLowerCase(),
+       phone: document.getElementById('phone').value.trim(),
         role:       document.getElementById('role').value,
         interest:   document.getElementById('interest').value,
         message:    document.getElementById('message').value.trim() || null,
